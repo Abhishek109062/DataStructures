@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.ListIterator;
 
@@ -19,5 +20,10 @@ public class ArrayLiist {
         ad.add("dfghjj");
         ad.add(10000);
         System.out.println(ad);
+        LinkedList obj;
+        obj = new LinkedList();
+        obj.add(100);
+        obj.add("Abhishek");
+        System.out.println(obj);
     }
 }
