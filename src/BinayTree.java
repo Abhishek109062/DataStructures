@@ -1,3 +1,5 @@
+import java.util.LinkedList;
+
 class BinayNode {
     int data;
     BinayNode right;
@@ -90,6 +92,30 @@ class BinayNode {
         if(right!=null)
             right.between();
     }
+
+    public LinkedList<Integer> searchpath(BinayNode root, int data){
+        if(this.data==data){
+            LinkedList<Integer> obj=new LinkedList<Integer>();
+            obj.add(data);
+            return obj;
+        }
+
+        if(data<this.data){
+            LinkedList<Integer> leftpath=searchpath(left,data);
+            if(left!=null)
+                leftpath.add(data);
+
+            return leftpath;
+        }
+
+        else{
+            LinkedList<Integer> rightpath=searchpath(right,data);
+            if(right!=null)
+                rightpath.add(data);
+
+            return rightpath;
+        }
+    }
 }
 
 
@@ -168,24 +194,32 @@ class BinaryTree{
     if(root!=null)
         root.between();
     }
+
+    public LinkedList<Integer> searchpath(int data){
+        if(root!=null)
+            return root.searchpath(root,data);
+
+        return null;
+    }
 }
 
 class Main {
     public static void main(String[] args) {
         BinaryTree obj=new BinaryTree();
-        obj.insert(10);
+        obj.insert(80);
         obj.insert(2);
         obj.insert(1);
         obj.insert(6);
-        obj.insert(8);
-        //obj.insert(5);
-        obj.insert(7);
-        obj.insert(49);
-        obj.insert(100);
-        obj.insert(16);
-        obj.between();
-        System.out.println();
-        System.out.println("Max : "+obj.max());
-        System.out.println("Min : "+obj.min());
+        obj.insert(10);
+//        //obj.insert(5);
+//        obj.insert(7);
+//        obj.insert(49);
+//        obj.insert(100);
+//        obj.insert(16);
+//        obj.between();
+//        System.out.println();
+//        System.out.println("Min : "+obj.min());
+//        System.out.println("Max : "+obj.max());
+        System.out.println(obj.searchpath(10));
     }
 }
