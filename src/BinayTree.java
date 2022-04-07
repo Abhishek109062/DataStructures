@@ -4,6 +4,7 @@ class BinayNode {
     int data;
     BinayNode right;
     BinayNode left;
+    int sum;
     BinayNode(int data) {
         this.data = data;
     }
@@ -84,15 +85,6 @@ class BinayNode {
         else
             return right.max();
     }
-    public void between(){
-        if(left!=null)
-            left.between();
-        if(data>=15 && data<=50)
-        System.out.print(data+" ");
-        if(right!=null)
-            right.between();
-    }
-
     public LinkedList<Integer> searchpath(BinayNode root, int data){
         if(this.data==data){
             LinkedList<Integer> obj=new LinkedList<Integer>();
@@ -115,6 +107,24 @@ class BinayNode {
 
             return rightpath;
         }
+    }
+
+    public void between(){
+        if(left!=null)
+            left.between();
+        if(data>=15 && data<=50)
+        System.out.print(data+" ");
+        if(right!=null)
+            right.between();
+    }
+
+    public void sumreplace(BinayNode temp){
+        if(temp==null)
+            return;
+        sumreplace(right);
+        int remp=data;
+        data=sum+remp;
+        sumreplace(left);
     }
 }
 
@@ -201,6 +211,11 @@ class BinaryTree{
 
         return null;
     }
+
+    public void sumreplace(){
+        if(root!=null)
+            root.sumreplace(root);
+    }
 }
 
 class Main {
@@ -211,6 +226,8 @@ class Main {
         obj.insert(1);
         obj.insert(6);
         obj.insert(10);
+        obj.sumreplace();
+        obj.preorderTraverse();
 //        //obj.insert(5);
 //        obj.insert(7);
 //        obj.insert(49);
@@ -220,6 +237,5 @@ class Main {
 //        System.out.println();
 //        System.out.println("Min : "+obj.min());
 //        System.out.println("Max : "+obj.max());
-        System.out.println(obj.searchpath(10));
-    }
+     }
 }
