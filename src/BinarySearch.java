@@ -1,63 +1,129 @@
-class searchNode{
-    int data;
-    searchNode left;
-    searchNode right;
-    public searchNode(int data){
-        this.data=data;
-    }
-}
+class BiTree {
+    class Node {
+        int data;
+        Node right, left;
 
-class BinaryT{
-    searchNode root;
-    public BinaryT(){
-        root=null;
+        public Node(int data) {
+            this.data = data;
+        }
+    }
+
+    Node root;
+
+    public BiTree() {
+        root = null;
     }
 
     public void insert(int data) {
-        root=insert(root,data);
+        root = insertnode(root, data);
     }
 
-
-    public searchNode insert(searchNode root,int data){
-        if(root==null){
-            root=new searchNode(data);
+    public Node insertnode(Node root, int data) {
+        if (root == null) {
+            root = new Node(data);
             return root;
         }
 
-        if(data==root.data)
-            return null;
-
-        if(data<root.data)
-            root.left=insert(root.left,data);
+        if (data < root.data)
+            root.left = insertnode(root.left, data);
         else
-            root.right=insert(root.right,data);
+            root.right = insertnode(root.right, data);
 
         return root;
     }
 
-
-    public void inorderTraverse(){
-            inorderTraverse(root);
+    public void inorder() {
+        inorder(root);
     }
 
-    public void inorderTraverse(searchNode root){
-        if(root!=null){
-            inorderTraverse(root.left);
-            System.out.print(root.data+" ");
-            inorderTraverse(root.right);
+    public void inorder(Node root) {
+        if (root == null)
+            return;
+
+        inorder(root.left);
+        System.out.println(root.data);
+        inorder(root.right);
+    }
+
+    public void preorder() {
+        preorder(root);
+    }
+
+    public void preorder(Node root) {
+        if (root == null)
+            return;
+
+        System.out.println(root.data);
+        preorder(root.left);
+        preorder(root.right);
+    }
+
+    public void postorder() {
+        postorder(root);
+    }
+
+    public void postorder(Node root) {
+        if (root == null)
+            return;
+
+        postorder(root.left);
+        postorder(root.right);
+        System.out.println(root.data);
+    }
+
+    public void delete(int data){
+        root=delete(root,data);
+    }
+
+    public Node delete(Node root,int data){
+        if(root==null)
+            return null;
+
+        if(data<root.data)
+            root.left=delete(root.left,data);
+        else if(data>root.data)
+            root.right=delete(root.right,data);
+        else{
+            if(root.right==null)
+                return root.left;
+            if(root.left==null)
+                return root.right;
+
+            root.data=min(root.right);
+            root.right=delete(root.right,root.data);
         }
+        return root;
     }
-}
 
-public class BinarySearch {
+    public int min(){
+        if(root!=null)
+            return min(root);
+        else
+            return Integer.MIN_VALUE;
+    }
+
+    public int min(Node root){
+        if(root.left==null)
+            return root.data;
+        else
+            return min(root.left);
+    }
 
     public static void main(String[] args) {
-        BinaryT obj=new BinaryT();
-        obj.insert(20);
+        BiTree obj = new BiTree();
+        obj.insert(50);
         obj.insert(100);
-        obj.insert(200);
+        obj.insert(40);
         obj.insert(30);
-        obj.insert(10);
-        obj.inorderTraverse();
+        obj.insert(20);
+        obj.insert(25);
+          obj.inorder();
+        System.out.println();
+        // obj.preorder();
+        //obj.postorder();
+        //System.out.println(obj.min());
+        obj.delete(40);
+        obj.inorder();
+
     }
 }
