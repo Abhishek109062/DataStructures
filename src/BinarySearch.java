@@ -109,6 +109,20 @@ class BiTree {
             return min(root.left);
     }
 
+    public int max(){
+        if(root!=null)
+            return max(root);
+        else
+            return Integer.MAX_VALUE;
+    }
+
+    public int max(Node root){
+        if(root.left==null)
+            return root.data;
+        else
+            return max(root.right);
+    }
+
     public static void main(String[] args) {
         BiTree obj = new BiTree();
         obj.insert(50);
@@ -117,13 +131,13 @@ class BiTree {
         obj.insert(30);
         obj.insert(20);
         obj.insert(25);
-          obj.inorder();
-        System.out.println();
+          //obj.inorder();
+        System.out.println(obj.max());
         // obj.preorder();
         //obj.postorder();
         //System.out.println(obj.min());
-        obj.delete(40);
-        obj.inorder();
+        //obj.delete(40);
+        //obj.inorder();
 
     }
 }
