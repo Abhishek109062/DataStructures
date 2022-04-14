@@ -31,18 +31,6 @@ public class QueueL {
 
     }
 
-    public void dequeue()
-    {
-        if(front==null)
-            System.out.println("Queue empty");
-
-        else{
-            front=front.next;
-        }
-
-        if(front==null)
-            rear=null;
-    }
 
     public void display()
     {
@@ -62,10 +50,6 @@ public class QueueL {
         obj.enqueue(100);
         obj.enqueue(20);
         obj.enqueue(2000);
-        obj.dequeue();
-        obj.dequeue();
-        obj.dequeue();
-        obj.dequeue();;
         obj.display();
     }
 }
