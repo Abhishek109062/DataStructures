@@ -12,7 +12,7 @@ public class Graph1 {
         addEdge(adj,2,1);
         addEdge(adj,1,3);
 
-       // printGraph(adj);
+        printGraph(adj);
         }
 
     static void addEdge(ArrayList<ArrayList <Integer>> adj , int u ,int v){
@@ -20,11 +20,11 @@ public class Graph1 {
         adj.get(v).add(u);
     }
 
-//    static void printGraph(ArrayList<ArrayList <Integer>> adj){
-//        for(int x=0;x<adj.size();x++){
-//            for(int y=0;y<adj.get(x).size();y++)
-//                System.out.print(adj.get(x).get(y)+" ");
-//            System.out.println();
-//        }
-//    }
+    static void printGraph(ArrayList<ArrayList <Integer>> adj){
+        for(int x=0;x<adj.size();x++){
+            for(int y=0;y<adj.get(x).size();y++)
+                System.out.print(adj.get(x).get(y)+" ");
+            System.out.println();
+        }
+    }
 }
