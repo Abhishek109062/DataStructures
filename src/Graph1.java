@@ -13,14 +13,15 @@ public class Graph1 {
         addEdge(adj,0,1);
         addEdge(adj,0,2);
         addEdge(adj,1,3);
+        addEdge(adj,1,4);
         addEdge(adj,2,3);
-        addEdge(adj,4,5);
-        addEdge(adj,4,6);
-        addEdge(adj,5,6);
+//        addEdge(adj,4,6);
+//        addEdge(adj,5,6);
 //
      //printGraph(adj);
        // BFS(adj,6,0);
-        System.out.println(BFSDis(adj,7));
+        //System.out.println(BFSDis(adj,7));
+        DFS(adj,v,0);
     }
 
     static void addEdge(ArrayList<ArrayList <Integer>> adj , int u ,int v){
@@ -36,6 +37,7 @@ public class Graph1 {
         }
     }
 
+    //Breadth first search
     static void BFS(ArrayList<ArrayList <Integer>> adj, int v, int s){
         boolean[] visited = new boolean[v+1];
         Queue <Integer> q=new LinkedList<>();
@@ -53,7 +55,7 @@ public class Graph1 {
         }
     }
 
-    //This is used when no source is given and the graph is disconnected
+    //Breadth First Search - This is used when no source is given and the graph is disconnected
     static void BFS(ArrayList<ArrayList<Integer>> adj, int v,int s,boolean[] visited){
         Queue<Integer> q=new LinkedList<>();
         visited[s]=true;
@@ -70,6 +72,7 @@ public class Graph1 {
         }
     }
 
+    //Breadth First Search - Used for disconnected graph
     static int BFSDis(ArrayList<ArrayList<Integer>> adj,int v){
         boolean visited[]=new boolean[v+1];
         int count=0; //this is used to count the connected components
@@ -80,5 +83,19 @@ public class Graph1 {
             }
 
         return count;
+    }
+
+
+    static void DFSRec(ArrayList<ArrayList<Integer>> adj , int s, boolean[] visited){
+        visited[s]=true;
+        System.out.print(s+" ");
+        for(int u:adj.get(s))
+            if(!visited[u])
+                DFSRec(adj, u,visited);
+    }
+
+    static void DFS(ArrayList<ArrayList<Integer>> adj,int v,int s){
+        boolean[] visited= new boolean[v];
+        DFSRec(adj,s,visited);
     }
 }
