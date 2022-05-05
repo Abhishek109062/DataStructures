@@ -94,6 +94,7 @@ public class Graph1 {
                 DFSRec(adj, u,visited);
     }
 
+    //Depth First Search
     static void DFS(ArrayList<ArrayList<Integer>> adj,int v,int s){
         boolean[] visited= new boolean[v];
         DFSRec(adj,s,visited);
