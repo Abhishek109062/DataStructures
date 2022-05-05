@@ -5,23 +5,24 @@ import java.util.function.BiFunction;
 
 public class Graph1 {
     public static void main(String[] args) {
-        int v=7;
+        int v=5;
         ArrayList<ArrayList <Integer>> adj= new ArrayList<>();
         for(int x=0;x<v;x++)
             adj.add(new ArrayList<Integer>(v));
 
         addEdge(adj,0,1);
         addEdge(adj,0,2);
-        addEdge(adj,1,3);
-        addEdge(adj,1,4);
-        addEdge(adj,2,3);
+        addEdge(adj,1,2);
+        addEdge(adj,3,4);
+
 //        addEdge(adj,4,6);
 //        addEdge(adj,5,6);
 //
      //printGraph(adj);
        // BFS(adj,6,0);
         //System.out.println(BFSDis(adj,7));
-        DFS(adj,v,0);
+        //DFS(adj,v,0);
+        DFS2(adj,v);
     }
 
     static void addEdge(ArrayList<ArrayList <Integer>> adj , int u ,int v){
@@ -98,5 +99,21 @@ public class Graph1 {
     static void DFS(ArrayList<ArrayList<Integer>> adj,int v,int s){
         boolean[] visited= new boolean[v];
         DFSRec(adj,s,visited);
+    }
+
+    //Depth First Search - For Disconnected graphs
+    static void DFSRec2(ArrayList<ArrayList<Integer>> adj,int s , boolean[] visited){
+        visited[s]=true;
+        System.out.print(s+" ");
+        for(int u:adj.get(s))
+            if(!visited[u])
+                DFSRec2(adj,u,visited);
+    }
+
+    static void DFS2(ArrayList<ArrayList<Integer>> adj,int v){
+        boolean visited[]=new boolean[v];
+        for(int i=0;i<v;i++)
+            if(!visited[i])
+                DFSRec2(adj,i,visited);
     }
 }
