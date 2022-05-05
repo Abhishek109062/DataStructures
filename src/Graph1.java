@@ -5,7 +5,7 @@ import java.util.function.BiFunction;
 
 public class Graph1 {
     public static void main(String[] args) {
-        int v=5;
+        int v=5 ;
         ArrayList<ArrayList <Integer>> adj= new ArrayList<>();
         for(int x=0;x<v;x++)
             adj.add(new ArrayList<Integer>(v));
@@ -13,7 +13,7 @@ public class Graph1 {
         addEdge(adj,0,1);
         addEdge(adj,0,2);
         addEdge(adj,1,2);
-        addEdge(adj,3,4);
+        addEdge(adj,2,4);
 
 //        addEdge(adj,4,6);
 //        addEdge(adj,5,6);
@@ -22,7 +22,8 @@ public class Graph1 {
        // BFS(adj,6,0);
         //System.out.println(BFSDis(adj,7));
         //DFS(adj,v,0);
-        DFS2(adj,v);
+        //DFS2(adj,v);
+        //shortestDis(adj,5,0);
     }
 
     static void addEdge(ArrayList<ArrayList <Integer>> adj , int u ,int v){
@@ -110,10 +111,43 @@ public class Graph1 {
                 DFSRec2(adj,u,visited);
     }
 
-    static void DFS2(ArrayList<ArrayList<Integer>> adj,int v){
+    static int DFS2(ArrayList<ArrayList<Integer>> adj,int v){
         boolean visited[]=new boolean[v];
-        for(int i=0;i<v;i++)
+        int count=0;//used to count the connected graphs
+        for(int i=0;i<v;i++){
             if(!visited[i])
+            {
+                count++;
                 DFSRec2(adj,i,visited);
+            }
+         }
+        return count;
     }
+
+//    //shortest dis from the source
+//    static void shortestDis(ArrayList<ArrayList<Integer>> adj, int v,int s){
+//        int[] dis=new int[v];
+//        for(int x=0;x<v;x++)
+//            dis[x]=Integer.MAX_VALUE;
+//
+//        dis[0]=0;
+//
+//        boolean[] visited = new boolean[v+1];
+//        Queue <Integer> q=new LinkedList<>();
+//        visited[s]=true;
+//        q.add(s);
+//        while(!q.isEmpty()){
+//            int u=q.poll();
+//            System.out.print(u+" ");
+//            for(int x:adj.get(u)){
+//                if(!visited[x]){
+//                    dis[x]=dis[u]+1;
+//                    visited[x]=true;
+//                    q.add(x);
+//                }
+//            }
+//        }
+//        for(int x=0;x<v;x++)
+//            System.out.println(dis[x]);
+//    }
 }
