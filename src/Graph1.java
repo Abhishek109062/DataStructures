@@ -1,6 +1,5 @@
 import java.util.*;
 import java.util.Queue;
-import java.util.function.BiFunction;
 
 public class Graph1 {
     public static void main(String[] args) {
@@ -28,18 +27,34 @@ public class Graph1 {
         int n= sc.nextInt();
         System.out.println("Enter the number of edges");
         int e = sc.nextInt();
-        int matrix[][] = new int[n][n];
+        //int matrix[][] = new int[n][n];
+        Edge[] obj=new Edge[e];
         for (int i = 0; i <e; i++) {
             int v1 = sc.nextInt();
             int v2 = sc.nextInt();
             int weight = sc.nextInt();
             // creation of undirected graph
-            matrix[v1][v2]= weight;
-            matrix[v2][v1] = weight;
+            //matrix[v1][v2]= weight;
+            //matrix[v2][v1] = weight;
+            obj[i]=new Edge(v1,v2,weight);
+
         }
         //prims(matrix);
-        for(int x:dijkstra(matrix,0))
-            System.out.print(x+" ");
+//        for(int x:dijkstra(matrix,0))
+//            System.out.print(x+" ");
+
+        Edge[] ans=kruskal(obj,n);
+        for (int i = 0; i <ans.length ; i++) {
+            if(ans[i].v1<ans[i].v2)
+            {
+                System.out.println(ans[i].v1+" " +ans[i].v2+"  "+ans[i].weight);
+            }
+
+            else
+            {
+                System.out.println(ans[i].v2+" "+ans[i].v1+"  "+ans[i].weight);
+            }
+        }
     }
 
     static void addEdge(ArrayList<ArrayList <Integer>> adj , int u ,int v){
@@ -233,5 +248,61 @@ public class Graph1 {
 
         }
         return dist;
+    }
+
+    //Kruskal algo for minimum spanning tree
+    public static Edge[] kruskal(Edge edges[], int v)
+    {
+        Arrays.sort(edges);
+        Edge[] ans = new Edge[v-1];
+        int count=0;
+        int i=0;
+        int[] parent = new int[v];
+        for (int j = 0; j <v ; j++) {
+            parent[j] = j;
+        }
+        while(count != v-1)
+        {
+
+            Edge currentedge = edges[i++];
+            int v1parent = findparent(currentedge.v1,parent);
+            int v2parent = findparent(currentedge.v2, parent);
+            if(v1parent != v2parent)
+            {
+                // including current edge
+                ans[count]= currentedge;
+                count++;
+                parent[v1parent]= v2parent;
+            }
+        }
+        return ans;
+    }
+
+    private static int findparent(int v1, int[] parent) {
+        if(v1 == parent[v1])
+        {
+            return v1;
+        }
+        return findparent(parent[v1],parent);
+    }
+}
+
+//comparable class for kruskal algorithm
+class Edge implements  Comparable<Edge>
+{
+    int v1;
+    int v2;
+    int weight;
+
+    public Edge(int v1, int v2, int weight) {
+        this.v1 = v1;
+        this.v2 = v2;
+        this.weight = weight;
+    }
+
+    @Override
+    public int compareTo(Edge o) {
+        return this.weight-o.weight;
+
     }
 }
