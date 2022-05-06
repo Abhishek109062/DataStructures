@@ -37,7 +37,9 @@ public class Graph1 {
             matrix[v1][v2]= weight;
             matrix[v2][v1] = weight;
         }
-        prims(matrix);
+        //prims(matrix);
+        for(int x:dijkstra(matrix,0))
+            System.out.print(x+" ");
     }
 
     static void addEdge(ArrayList<ArrayList <Integer>> adj , int u ,int v){
@@ -210,5 +212,26 @@ public class Graph1 {
             }
         }
         return minvertex;
+    }
+
+    static int[] dijkstra(int[][] graph, int s){
+        int v=graph.length;
+        int[] dist=new int[v];
+        Arrays.fill(dist,Integer.MAX_VALUE);
+        dist[s]=0;
+        boolean fin[]=new boolean[v];
+        for(int count=0;count<v-1;count++){
+            int u=-1;
+            for(int i=0;i<v;i++)
+                if(!fin[i] && (u==-1 || dist[i]<dist[u]))
+                    u=i;
+
+            fin[u]=true;
+            for(int x=0;x<v;x++)
+                if(!fin[x] && graph[u][x]!=0)
+                    dist[x]=Math.min(dist[x],dist[u]+graph[u][x]);
+
+        }
+        return dist;
     }
 }
