@@ -24,6 +24,7 @@ public class Graph1 {
         //shortestDis(adj,5,0);
         Scanner sc = new Scanner(System.in);
         System.out.println("Enter the number of vertex");
+
         int n= sc.nextInt();
         System.out.println("Enter the number of edges");
         int e = sc.nextInt();
@@ -303,6 +304,5 @@ class Edge implements  Comparable<Edge>
     @Override
     public int compareTo(Edge o) {
         return this.weight-o.weight;
-
     }
 }

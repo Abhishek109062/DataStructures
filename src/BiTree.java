@@ -20,8 +20,8 @@ class BiTree {
 
     public Node insertnode(Node root, int data) {
         if (root == null) {
-            root = new Node(data);
-            return root;
+            return new Node(data);
+
         }
 
         if (data < root.data)
@@ -127,13 +127,13 @@ class BiTree {
         BiTree obj = new BiTree();
         obj.insert(50);
         obj.insert(100);
-        obj.insert(40);
+        obj.insert(50);
         obj.insert(30);
         obj.insert(20);
         obj.insert(25);
-          //obj.inorder();
-        System.out.println(obj.max());
-        // obj.preorder();
+        obj.inorder();
+        //System.out.println(obj.max());
+        //obj.preorder();
         //obj.postorder();
         //System.out.println(obj.min());
         //obj.delete(40);
