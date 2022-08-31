@@ -6,7 +6,7 @@ class subSq_Sumk{
     public static void main(String[] args) {
         Scanner sc=new Scanner(System.in);
         List<List<Integer>> ans=new ArrayList<>();
-        subsQ(0,new int[]{1,2,1},ans, new ArrayList<>(),0,2,3);
+        subsQ(0,new int[]{1,2,1,5,6,8,9},ans, new ArrayList<>(),0,17,7);
         System.out.println(ans);
             
     }
