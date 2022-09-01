@@ -14,13 +14,14 @@ class subSq_Sumk{
     public static void subsQ(int index,int nums[],List<List<Integer>> ans, List<Integer> temp,int s,int sum,int n){
         if(index==n){
             if(sum==s)
-            ans.add(new ArrayList<>(temp));
+                ans.add(new ArrayList<>(temp));
             return;
         }
-
+        //to find subseq with nums[index]
         temp.add(nums[index]);
         s+=nums[index];
         subsQ(index+1,nums,ans, temp,s,sum,n);
+        //to find subseq without nums[index]
         temp.remove(temp.size()-1);
         s-=nums[index];
         subsQ(index+1,nums,ans, temp,s,sum,n);
